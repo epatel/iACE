@@ -39,7 +39,7 @@ unsigned char *memptr[8] = {
 unsigned char keyboard_get_keyport(int port);
 void keyboard_clear();
 
-unsigned long tstates=0, tsmax=62500, tsmaxfreq=50;
+unsigned long tstates=0, tsmax=65000, tsmaxfreq=50;
 
 int memattr[8] = {0,1,1,1,1,1,1,1}; /* 8K RAM Banks */
 
@@ -293,7 +293,7 @@ unsigned int out(int h, int l, int a)
                 int dt = tstates-sound_tsstate;
                 if (dt < 0)
                     dt += tsmax;
-                int n = (416/440.0)*(Float32)dt/(tsmax*tsmaxfreq/22050); // nudge for better quality, 22kHz for full period measure
+                int n = (Float32)dt/(tsmax*tsmaxfreq/22050);
                 soundGenerator.periodLength = n;
                 sound_tsstate = tstates;
                 break;

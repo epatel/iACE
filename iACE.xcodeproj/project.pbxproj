@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3A0684E516905C120014D35F /* SoundGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0684E416905C120014D35F /* SoundGenerator.m */; };
 		3A0684E816905D550014D35F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A0684E716905D550014D35F /* AudioToolbox.framework */; };
+		3A5B119E1698F93500BDD716 /* MyPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B119D1698F93500BDD716 /* MyPanGestureRecognizer.m */; };
+		3A5B11A21698FC9D00BDD716 /* AnnotationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B11A01698FC9D00BDD716 /* AnnotationViewController.m */; };
+		3A5B11A31698FC9D00BDD716 /* AnnotationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5B11A11698FC9D00BDD716 /* AnnotationViewController.xib */; };
+		3A5B11A81699A6B800BDD716 /* annotations.dic in Resources */ = {isa = PBXBuildFile; fileRef = 3A5B11A71699A6B800BDD716 /* annotations.dic */; };
 		3AB85D56168E165900A41FAE /* JA-Manual-Second-Edition.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3AB85D55168E165900A41FAE /* JA-Manual-Second-Edition.pdf */; };
 		3AB85D58168E54F600A41FAE /* jupiterace.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3AB85D57168E54F600A41FAE /* jupiterace.jpg */; };
 		3AB85D5A168F1A8900A41FAE /* jupiterace@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3AB85D59168F1A8900A41FAE /* jupiterace@2x.jpg */; };
@@ -39,6 +43,13 @@
 		3A0684E316905C120014D35F /* SoundGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundGenerator.h; sourceTree = "<group>"; };
 		3A0684E416905C120014D35F /* SoundGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundGenerator.m; sourceTree = "<group>"; };
 		3A0684E716905D550014D35F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3A5B119A1698A5BF00BDD716 /* iACE.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iACE.xcconfig; sourceTree = "<group>"; };
+		3A5B119C1698F93500BDD716 /* MyPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPanGestureRecognizer.h; sourceTree = "<group>"; };
+		3A5B119D1698F93500BDD716 /* MyPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPanGestureRecognizer.m; sourceTree = "<group>"; };
+		3A5B119F1698FC9D00BDD716 /* AnnotationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationViewController.h; sourceTree = "<group>"; };
+		3A5B11A01698FC9D00BDD716 /* AnnotationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationViewController.m; sourceTree = "<group>"; };
+		3A5B11A11698FC9D00BDD716 /* AnnotationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnotationViewController.xib; sourceTree = "<group>"; };
+		3A5B11A71699A6B800BDD716 /* annotations.dic */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = annotations.dic; sourceTree = "<group>"; };
 		3AB85D55168E165900A41FAE /* JA-Manual-Second-Edition.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "JA-Manual-Second-Edition.pdf"; sourceTree = "<group>"; };
 		3AB85D57168E54F600A41FAE /* jupiterace.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jupiterace.jpg; sourceTree = "<group>"; };
 		3AB85D59168F1A8900A41FAE /* jupiterace@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jupiterace@2x.jpg"; sourceTree = "<group>"; };
@@ -115,6 +126,7 @@
 		3AD4ADE5167FD7F0007CFAA3 = {
 			isa = PBXGroup;
 			children = (
+				3A5B119A1698A5BF00BDD716 /* iACE.xcconfig */,
 				3AD4ADFA167FD7F0007CFAA3 /* iACE */,
 				3AD4ADF3167FD7F0007CFAA3 /* Frameworks */,
 				3AD4ADF1167FD7F0007CFAA3 /* Products */,
@@ -146,6 +158,7 @@
 				3AB85D5F168F213900A41FAE /* images */,
 				3AB85D55168E165900A41FAE /* JA-Manual-Second-Edition.pdf */,
 				3AD4AE17167FD900007CFAA3 /* ace.rom */,
+				3A5B11A71699A6B800BDD716 /* annotations.dic */,
 				3AD4AE24167FDE9C007CFAA3 /* ace.rom.h */,
 				3AB85D78168FBF0A00A41FAE /* frogger.h */,
 				3AD4AE22167FDC16007CFAA3 /* iace.m */,
@@ -163,6 +176,11 @@
 				3AB85D6B168F24A400A41FAE /* MyPDFView.m */,
 				3A0684E316905C120014D35F /* SoundGenerator.h */,
 				3A0684E416905C120014D35F /* SoundGenerator.m */,
+				3A5B119C1698F93500BDD716 /* MyPanGestureRecognizer.h */,
+				3A5B119D1698F93500BDD716 /* MyPanGestureRecognizer.m */,
+				3A5B119F1698FC9D00BDD716 /* AnnotationViewController.h */,
+				3A5B11A01698FC9D00BDD716 /* AnnotationViewController.m */,
+				3A5B11A11698FC9D00BDD716 /* AnnotationViewController.xib */,
 				3AD4ADFB167FD7F0007CFAA3 /* Supporting Files */,
 			);
 			path = iACE;
@@ -186,6 +204,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AD4AE14167FD7F0007CFAA3 /* Build configuration list for PBXNativeTarget "iACE" */;
 			buildPhases = (
+				3A5B11A61699A66200BDD716 /* ShellScript */,
 				3AD4ADEC167FD7F0007CFAA3 /* Sources */,
 				3AD4ADED167FD7F0007CFAA3 /* Frameworks */,
 				3AD4ADEE167FD7F0007CFAA3 /* Resources */,
@@ -245,10 +264,28 @@
 				3AB85D74168FA2E600A41FAE /* sliderthumb.png in Resources */,
 				3AB85D7B168FCD4100A41FAE /* reset_msg@2x.png in Resources */,
 				3AB85D7C168FCD4100A41FAE /* reset_msg.png in Resources */,
+				3A5B11A31698FC9D00BDD716 /* AnnotationViewController.xib in Resources */,
+				3A5B11A81699A6B800BDD716 /* annotations.dic in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3A5B11A61699A66200BDD716 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "FILE_PATH=\"${PROJECT_DIR}/iACE/annotations.dic\"\nTMP_FILE_PATH=\"/tmp/annotations.dic\"\n\nif [[ -e \"$TMP_FILE_PATH\" ]]\nthen\n    echo \"YES\"\n    cp \"$TMP_FILE_PATH\" \"$FILE_PATH\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3AD4ADEC167FD7F0007CFAA3 /* Sources */ = {
@@ -262,6 +299,8 @@
 				3AD4AE23167FDC16007CFAA3 /* iace.m in Sources */,
 				3AB85D6C168F24A400A41FAE /* MyPDFView.m in Sources */,
 				3A0684E516905C120014D35F /* SoundGenerator.m in Sources */,
+				3A5B119E1698F93500BDD716 /* MyPanGestureRecognizer.m in Sources */,
+				3A5B11A21698FC9D00BDD716 /* AnnotationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +328,7 @@
 /* Begin XCBuildConfiguration section */
 		3AD4AE12167FD7F0007CFAA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A5B119A1698A5BF00BDD716 /* iACE.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -318,6 +358,7 @@
 		};
 		3AD4AE13167FD7F0007CFAA3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A5B119A1698A5BF00BDD716 /* iACE.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

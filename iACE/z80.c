@@ -43,8 +43,6 @@ unsigned char partable[256] = {
     4, 0, 0, 4, 0, 4, 4, 0, 0, 4, 4, 0, 4, 0, 0, 4
 };
 
-// Preparation for persistent function by moving Z80 CPU out here.
-
 static struct {
     unsigned char op;
     unsigned char a, f, b, c, d, e, h, l;
@@ -55,6 +53,12 @@ static struct {
     unsigned char ixoriy, new_ixoriy;
     unsigned char intsample;
 } g;
+
+void get_z80_internal_state(char **ptr, int *len)
+{
+    *ptr = (char*)&g;
+    *len = sizeof(g);
+}
 
 void mainloop()
 {
@@ -108,7 +112,7 @@ void mainloop()
 #include "z80ops.c"
         }
         
-        if (tstates>tsmax)
+        if (tstates > tsmax)
             fix_tstates();
         
         if (interrupted == 1 && intsample && iff1) {

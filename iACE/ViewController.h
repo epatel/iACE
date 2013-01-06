@@ -21,6 +21,10 @@
 @property (assign, nonatomic) CGFloat panStartPosition;
 @property (weak, nonatomic) IBOutlet UIScrollView *bookScrollView;
 @property (weak, nonatomic) IBOutlet UISlider *pageSlider;
+@property (weak, nonatomic) IBOutlet UISwitch *editSwitch;
+@property (weak, nonatomic) MyAnnotation *createdAnnotation;
+@property (weak, nonatomic) MyAnnotation *movingAnnotation;
+@property (strong, nonatomic) UIPopoverController *popover;
 
 - (IBAction)keyDown:(id)sender;
 - (IBAction)keyUp:(id)sender;
@@ -29,5 +33,6 @@
 - (IBAction)gestureTapped:(UITapGestureRecognizer*)sender;
 - (IBAction)gestureLongPressed:(UILongPressGestureRecognizer*)sender;
 - (IBAction)pageSliderChanged:(id)sender;
+- (IBAction)editModeChanged:(id)sender;
 
 @end

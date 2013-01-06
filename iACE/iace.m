@@ -41,6 +41,7 @@ void keyboard_keypress(int aceKey);
 void keyboard_keyrelease(int aceKey);
 void keyboard_clear();
 void get_z80_internal_state(char **ptr, int *len);
+void set_z80_internal_state(const char *ptr);
 
 unsigned long tstates=0, tsmax=65000, tsmaxfreq=50;
 
@@ -240,10 +241,7 @@ void load_state()
         NSData *z80 = state[@"z80"];
         NSData *memory = state[@"memory"];
         memcpy(mem, memory.bytes, MIN(memory.length, sizeof(mem)));
-        char *z80ptr;
-        int z80len;
-        get_z80_internal_state(&z80ptr, &z80len);
-        memcpy(z80ptr, z80.bytes, MIN(z80.length, sizeof(z80len)));
+        set_z80_internal_state(z80.bytes);
     }
 }
 
@@ -361,6 +359,7 @@ void fix_tstates()
     if (first_time) {
         first_time = 0;
         load_state();
+        keyboard_clear();
     }
     static CFAbsoluteTime t0 = 0.0;
     CFAbsoluteTime t1 = CFAbsoluteTimeGetCurrent();

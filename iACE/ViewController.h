@@ -27,6 +27,7 @@
 @property (strong, nonatomic) UIPopoverController *popover;
 
 - (IBAction)keyDown:(id)sender;
+- (IBAction)shiftKeyDown:(id)sender;
 - (IBAction)keyUp:(id)sender;
 
 - (IBAction)gestureMoved:(UIPanGestureRecognizer*)sender;

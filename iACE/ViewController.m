@@ -356,7 +356,7 @@ int spooler_read_char()
     if (spooler_is_active())
         return;
     int x = [sender tag];
-    keyboard_ports[0xff & x] &= 0xff & ~(x>>8);
+    keyboard_ports[0xff & x] &= ~(x>>8);
 }
 
 - (IBAction)keyUp:(id)sender
@@ -370,7 +370,29 @@ int spooler_read_char()
         }
         return;
     }
-    keyboard_ports[0xff & x] |= ~(0xff & ~(x>>8));
+    keyboard_ports[0xff & x] |= (x>>8);
+}
+
+- (void)highlightButton:(UIButton *)b
+{
+    [b setHighlighted:YES];
+}
+
+- (IBAction)shiftKeyDown:(UIButton*)sender
+{
+    if (spooler_is_active())
+        return;
+    
+    int x = sender.tag;
+    BOOL pressed = !(keyboard_ports[0xff & x] & (x>>8));
+    
+    if (pressed)
+        keyboard_ports[0xff & x] |= (x>>8);
+    else
+        keyboard_ports[0xff & x] &= 0xff & ~(x>>8);
+
+    if (!pressed)
+        [self performSelector:@selector(highlightButton:) withObject:sender afterDelay:0.0];
 }
 
 - (void)calculateBookViewSizeAndPosition

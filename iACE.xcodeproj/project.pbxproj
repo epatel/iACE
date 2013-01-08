@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3A0684E516905C120014D35F /* SoundGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0684E416905C120014D35F /* SoundGenerator.m */; };
 		3A0684E816905D550014D35F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A0684E716905D550014D35F /* AudioToolbox.framework */; };
+		3A369E1C169B922500F4EC0C /* settingslid.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A369E1A169B922500F4EC0C /* settingslid.jpg */; };
+		3A369E1D169B922500F4EC0C /* settingslid@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A369E1B169B922500F4EC0C /* settingslid@2x.jpg */; };
+		3A369E21169BA1E700F4EC0C /* MyInnerShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A369E20169BA1E700F4EC0C /* MyInnerShadowView.m */; };
 		3A5B119E1698F93500BDD716 /* MyPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B119D1698F93500BDD716 /* MyPanGestureRecognizer.m */; };
 		3A5B11A21698FC9D00BDD716 /* AnnotationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B11A01698FC9D00BDD716 /* AnnotationViewController.m */; };
 		3A5B11A31698FC9D00BDD716 /* AnnotationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5B11A11698FC9D00BDD716 /* AnnotationViewController.xib */; };
@@ -43,6 +46,10 @@
 		3A0684E316905C120014D35F /* SoundGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundGenerator.h; sourceTree = "<group>"; };
 		3A0684E416905C120014D35F /* SoundGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundGenerator.m; sourceTree = "<group>"; };
 		3A0684E716905D550014D35F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3A369E1A169B922500F4EC0C /* settingslid.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = settingslid.jpg; sourceTree = "<group>"; };
+		3A369E1B169B922500F4EC0C /* settingslid@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "settingslid@2x.jpg"; sourceTree = "<group>"; };
+		3A369E1F169BA1E700F4EC0C /* MyInnerShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInnerShadowView.h; sourceTree = "<group>"; };
+		3A369E20169BA1E700F4EC0C /* MyInnerShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInnerShadowView.m; sourceTree = "<group>"; };
 		3A5B119A1698A5BF00BDD716 /* iACE.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iACE.xcconfig; sourceTree = "<group>"; };
 		3A5B119C1698F93500BDD716 /* MyPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPanGestureRecognizer.h; sourceTree = "<group>"; };
 		3A5B119D1698F93500BDD716 /* MyPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPanGestureRecognizer.m; sourceTree = "<group>"; };
@@ -119,6 +126,8 @@
 				3AB85D59168F1A8900A41FAE /* jupiterace@2x.jpg */,
 				3AB85D79168FCD4000A41FAE /* reset_msg@2x.png */,
 				3AB85D7A168FCD4000A41FAE /* reset_msg.png */,
+				3A369E1A169B922500F4EC0C /* settingslid.jpg */,
+				3A369E1B169B922500F4EC0C /* settingslid@2x.jpg */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -181,6 +190,8 @@
 				3A5B119F1698FC9D00BDD716 /* AnnotationViewController.h */,
 				3A5B11A01698FC9D00BDD716 /* AnnotationViewController.m */,
 				3A5B11A11698FC9D00BDD716 /* AnnotationViewController.xib */,
+				3A369E1F169BA1E700F4EC0C /* MyInnerShadowView.h */,
+				3A369E20169BA1E700F4EC0C /* MyInnerShadowView.m */,
 				3AD4ADFB167FD7F0007CFAA3 /* Supporting Files */,
 			);
 			path = iACE;
@@ -266,6 +277,8 @@
 				3AB85D7C168FCD4100A41FAE /* reset_msg.png in Resources */,
 				3A5B11A31698FC9D00BDD716 /* AnnotationViewController.xib in Resources */,
 				3A5B11A81699A6B800BDD716 /* annotations.dic in Resources */,
+				3A369E1C169B922500F4EC0C /* settingslid.jpg in Resources */,
+				3A369E1D169B922500F4EC0C /* settingslid@2x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +314,7 @@
 				3A0684E516905C120014D35F /* SoundGenerator.m in Sources */,
 				3A5B119E1698F93500BDD716 /* MyPanGestureRecognizer.m in Sources */,
 				3A5B11A21698FC9D00BDD716 /* AnnotationViewController.m in Sources */,
+				3A369E21169BA1E700F4EC0C /* MyInnerShadowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -308,6 +308,7 @@ int spooler_read_char()
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger lastpage = [defaults integerForKey:@"lastpage"];
     BOOL shownResetMessage = [defaults boolForKey:@"reset_msg"];
+    self.toggleShiftKeySwitch.on = [defaults boolForKey:@"toggle_shift_keys"];
     
     if (lastpage)
         [self gotoPage:lastpage];
@@ -356,6 +357,8 @@ int spooler_read_char()
     if (spooler_is_active())
         return;
     int x = [sender tag];
+    if ((x==256 || x==512) && self.toggleShiftKeySwitch.on)
+        return;
     keyboard_ports[0xff & x] &= ~(x>>8);
 }
 
@@ -363,13 +366,15 @@ int spooler_read_char()
 {
     int x = [sender tag];
     if (spooler_is_active()) {
-        if (x == 263) { // break! stop spooling is break-space pressed (on keyup for safety)
+        if (x==263) { // break! stop spooling if break-space pressed (on keyup for safety)
             free(spooling_string);
             spooling_string = NULL;
             spooling_string_pos = NULL;
         }
         return;
     }
+    if ((x==256 || x==512) && self.toggleShiftKeySwitch.on)
+        return;
     keyboard_ports[0xff & x] |= (x>>8);
 }
 
@@ -384,6 +389,11 @@ int spooler_read_char()
         return;
     
     int x = sender.tag;
+    if (!self.toggleShiftKeySwitch.on) {
+        [self keyUp:sender];
+        return;
+    }
+    
     BOOL pressed = !(keyboard_ports[0xff & x] & (x>>8));
     
     if (pressed)
@@ -679,6 +689,64 @@ int spooler_read_char()
         [MyPDFView saveAnnotations];
 }
 
+- (IBAction)lidGestureMoved:(UIPanGestureRecognizer*)panGesture
+{
+    CGPoint center = self.settingsLidImageView.center;
+    CGPoint translation = [panGesture translationInView:self.settingsLidImageView];
+    center.x += translation.x;
+    center.y += translation.y;
+    center.x = MAX(center.x, 0);
+    center.y = MAX(center.y, 0);
+    center.x = MIN(center.x, 768);
+    center.y = MIN(center.y, 300);
+    
+    self.settingsLidImageView.center = center;
+
+    [panGesture setTranslation:CGPointZero inView:self.settingsLidImageView];
+
+    if (panGesture.state == UIGestureRecognizerStateEnded) {
+        CGPoint p = [panGesture locationInView:self.settingsLidImageView.superview];
+        if (CGRectContainsPoint(CGRectMake(24, 6, 378, 178), p)) {
+            [UIView animateWithDuration:0.3
+                             animations:^{
+                                 self.settingsLidImageView.frame = CGRectMake(24, 6, 378, 178);
+                             }
+                             completion:^(BOOL finished) {
+                                 self.settingsLidImageView.layer.shadowOpacity = 0.0;
+                             }];
+        }
+    } else {
+        if (self.settingsLidImageView.layer.shadowOpacity < 0.1) {
+            self.settingsLidImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+            self.settingsLidImageView.layer.shadowOffset = CGSizeMake(0, 8);
+            self.settingsLidImageView.layer.shadowRadius = 7;
+            self.settingsLidImageView.layer.shadowOpacity = 0.7;
+        }
+    }
+}
+
+- (IBAction)resetPressed:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset"
+                                                    message:@"Do you want to reset the Jupiter ACE?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes", nil];
+    [alert show];
+}
+
+- (IBAction)toggleShiftKeysSwitch:(id)sender
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:self.toggleShiftKeySwitch.on forKey:@"toggle_shift_keys"];
+    [defaults synchronize];
+}
+
+- (IBAction)openInfoPage:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://memention.com/iace"]];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.x < 768/2) {
@@ -767,6 +835,8 @@ int spooler_read_char()
     [self setBookScrollView:nil];
     [self setPageSlider:nil];
     [self setEditSwitch:nil];
+    [self setSettingsLidImageView:nil];
+    [self setToggleShiftKeySwitch:nil];
     [super viewDidUnload];
 }
 

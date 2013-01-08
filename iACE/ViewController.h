@@ -25,6 +25,8 @@
 @property (weak, nonatomic) MyAnnotation *createdAnnotation;
 @property (weak, nonatomic) MyAnnotation *movingAnnotation;
 @property (strong, nonatomic) UIPopoverController *popover;
+@property (weak, nonatomic) IBOutlet UIImageView *settingsLidImageView;
+@property (weak, nonatomic) IBOutlet UISwitch *toggleShiftKeySwitch;
 
 - (IBAction)keyDown:(id)sender;
 - (IBAction)shiftKeyDown:(id)sender;
@@ -35,5 +37,9 @@
 - (IBAction)gestureLongPressed:(UILongPressGestureRecognizer*)sender;
 - (IBAction)pageSliderChanged:(id)sender;
 - (IBAction)editModeChanged:(id)sender;
+- (IBAction)lidGestureMoved:(id)sender;
+- (IBAction)resetPressed:(id)sender;
+- (IBAction)toggleShiftKeysSwitch:(id)sender;
+- (IBAction)openInfoPage:(id)sender;
 
 @end

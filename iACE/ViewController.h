@@ -34,7 +34,6 @@
 
 - (IBAction)gestureMoved:(UIPanGestureRecognizer*)sender;
 - (IBAction)gestureTapped:(UITapGestureRecognizer*)sender;
-- (IBAction)gestureLongPressed:(UILongPressGestureRecognizer*)sender;
 - (IBAction)pageSliderChanged:(id)sender;
 - (IBAction)editModeChanged:(id)sender;
 - (IBAction)lidGestureMoved:(id)sender;

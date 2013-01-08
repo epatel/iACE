@@ -307,7 +307,7 @@ int spooler_read_char()
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger lastpage = [defaults integerForKey:@"lastpage"];
-    BOOL shownResetMessage = [defaults boolForKey:@"reset_msg"];
+    BOOL shownResetMessage = [defaults boolForKey:@"reset_msg2"];
     self.toggleShiftKeySwitch.on = [defaults boolForKey:@"toggle_shift_keys"];
     
     if (lastpage)
@@ -644,30 +644,6 @@ int spooler_read_char()
     }
 }
 
-- (IBAction)gestureLongPressed:(UILongPressGestureRecognizer*)sender
-{
-    CGPoint p = [sender locationInView:sender.view];
-    if (p.y > 340) {
-        sender.enabled = NO;
-        sender.enabled = YES;
-    } else if (sender.state == UIGestureRecognizerStateBegan) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset"
-                                                        message:@"Do you want to reset the Jupiter ACE?"
-                                                       delegate:self
-                                              cancelButtonTitle:@"No"
-                                              otherButtonTitles:@"Yes", nil];
-        [alert show];
-        
-        UIView *v = [self.keyboardDrawer viewWithTag:99];
-        if (v) {
-            [v removeFromSuperview];
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setBool:YES forKey:@"reset_msg"];
-            [defaults synchronize];
-        }
-    }
-}
-
 - (IBAction)pageSliderChanged:(id)sender
 {
     int currentPage = self.pageSlider.value;
@@ -693,6 +669,7 @@ int spooler_read_char()
 {
     CGPoint center = self.settingsLidImageView.center;
     CGPoint translation = [panGesture translationInView:self.settingsLidImageView];
+
     center.x += translation.x;
     center.y += translation.y;
     center.x = MAX(center.x, 0);
@@ -716,6 +693,13 @@ int spooler_read_char()
                              }];
         }
     } else {
+        UIView *v = [self.keyboardDrawer viewWithTag:99];
+        if (v) {
+            [v removeFromSuperview];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setBool:YES forKey:@"reset_msg2"];
+            [defaults synchronize];
+        }
         if (self.settingsLidImageView.layer.shadowOpacity < 0.1) {
             self.settingsLidImageView.layer.shadowColor = [UIColor blackColor].CGColor;
             self.settingsLidImageView.layer.shadowOffset = CGSizeMake(0, 8);

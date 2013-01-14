@@ -7966,7 +7966,6 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="editModeChanged:">id</string>
-						<string key="gestureLongPressed:">UILongPressGestureRecognizer</string>
 						<string key="gestureMoved:">UIPanGestureRecognizer</string>
 						<string key="gestureTapped:">UITapGestureRecognizer</string>
 						<string key="keyDown:">id</string>
@@ -7982,10 +7981,6 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<object class="IBActionInfo" key="editModeChanged:">
 							<string key="name">editModeChanged:</string>
 							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="gestureLongPressed:">
-							<string key="name">gestureLongPressed:</string>
-							<string key="candidateClassName">UILongPressGestureRecognizer</string>
 						</object>
 						<object class="IBActionInfo" key="gestureMoved:">
 							<string key="name">gestureMoved:</string>

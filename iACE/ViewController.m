@@ -316,10 +316,10 @@ int spooler_read_char()
         [self gotoPage:2]; // Manual pdf seem to have an empty "initial" page
     
     if (!shownResetMessage) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"reset_msg"]];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"reveal"]];
         imageView.tag = 99;
         [self.keyboardDrawer addSubview:imageView];
-        imageView.center = CGPointMake(768/2, 150);
+        imageView.center = CGPointMake(450, 200);
     }
     
     self.screenDrawer.layer.shadowOffset = CGSizeMake(0, 8);

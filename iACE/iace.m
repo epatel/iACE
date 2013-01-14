@@ -37,7 +37,11 @@ unsigned char *memptr[8] = {
 };
 
 unsigned char keyboard_get_keyport(int port);
+void keyboard_keypress(int aceKey);
+void keyboard_keyrelease(int aceKey);
 void keyboard_clear();
+void get_z80_internal_state(char **ptr, int *len);
+void set_z80_internal_state(const char *ptr);
 
 unsigned long tstates=0, tsmax=65000, tsmaxfreq=50;
 
@@ -229,6 +233,33 @@ void patch_rom(unsigned char *mem)
     mem[0x1822]=0xc9;
 }
 
+void load_state()
+{
+    NSString *cachedir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    NSDictionary *state = [NSDictionary dictionaryWithContentsOfFile:[cachedir stringByAppendingString:@"/state.mem"]];
+    if (state) {
+        NSData *z80 = state[@"z80"];
+        NSData *memory = state[@"memory"];
+        memcpy(mem, memory.bytes, MIN(memory.length, sizeof(mem)));
+        set_z80_internal_state(z80.bytes);
+    }
+}
+
+void save_state()
+{
+    NSString *cachedir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    
+    NSMutableDictionary *state = [NSMutableDictionary dictionary];
+    
+    char *z80ptr;
+    int z80len;
+    get_z80_internal_state(&z80ptr, &z80len);
+    state[@"z80"] = [NSData dataWithBytes:z80ptr length:z80len];
+    state[@"memory"] = [NSData dataWithBytes:mem length:sizeof(mem)];
+
+    [state writeToFile:[cachedir stringByAppendingString:@"/state.mem"] atomically:YES];
+}
+
 void setup_iace()
 {
     memcpy(mem, ace_rom, ace_rom_len);
@@ -236,8 +267,8 @@ void setup_iace()
     memset(mem+8192, 0xff, sizeof(mem)-8192);
     keyboard_clear();
 
-    NSString *dir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];    
-    tapes = [NSMutableDictionary dictionaryWithContentsOfFile:[dir stringByAppendingString:@"/tapes.dic"]];
+    NSString *docsdir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    tapes = [NSMutableDictionary dictionaryWithContentsOfFile:[docsdir stringByAppendingString:@"/tapes.dic"]];
     if (!tapes) {
         tapes = [NSMutableDictionary dictionary];
         tapes[@"frogger.dic"] = [NSData dataWithBytes:FROGGER_DIC length:FROGGER_DIC_len];
@@ -248,10 +279,39 @@ static BOOL soundStarted = NO;
 static int sound_tsstate = 0;
 static SoundGenerator *soundGenerator;
 
+int spooler_read_char();
+
 unsigned int in(int h, int l)
 {
-    if (l==0xfe) /* keyboard */
-        switch(h) {
+    static int scans_left_before_next = 0;
+    
+    if (l==0xfe && h==0xfe && !scans_left_before_next) {
+        static int x = 0;
+        
+        if (x) {
+            keyboard_clear();
+            if (x==0x0a)
+                scans_left_before_next = 4;
+            x = 0;
+        } else {
+            x = spooler_read_char();
+            if (x) {
+                keyboard_keypress(x);
+                scans_left_before_next = 4;
+            }
+        }
+        
+    } else if (l==0xfe && h==0xfd && scans_left_before_next) {
+        scans_left_before_next--;
+    }
+
+    if (l==0xfe) {        
+        if (!soundStarted && soundGenerator) {
+            [soundGenerator deactivateAudioSession];
+            soundGenerator = nil;
+        }
+        soundStarted = NO;
+        switch (h) {
             case 0xfe:
                 return keyboard_get_keyport(0);
             case 0xfd:
@@ -267,45 +327,40 @@ unsigned int in(int h, int l)
             case 0xbf:
                 return keyboard_get_keyport(6);
             case 0x7f:
-                if (!soundStarted && soundGenerator) {
-                    [soundGenerator deactivateAudioSession];
-                    soundGenerator = nil;
-                }
-                soundStarted = NO;
                 return keyboard_get_keyport(7);
             default:
                 return 255;
         }
+    }
     return 255;
 }
 
 unsigned int out(int h, int l, int a)
 {
-    if (l==0xfe)
-        switch(h) {
-            case 0x0:
-            {
-                if (!soundGenerator) {
-                    soundGenerator = [[SoundGenerator alloc] init];
-                    [soundGenerator activateAudioSession];
-                }
-                soundStarted = YES;
-                int dt = tstates-sound_tsstate;
-                if (dt < 0)
-                    dt += tsmax;
-                int n = (Float32)dt/(tsmax*tsmaxfreq/22050);
-                soundGenerator.periodLength = n;
-                sound_tsstate = tstates;
-                break;
-            }
-            default:
-                break;
+    if (l==0xfe) {
+        if (!soundGenerator) {
+            soundGenerator = [[SoundGenerator alloc] init];
+            [soundGenerator activateAudioSession];
         }
+        soundStarted = YES;
+        int dt = tstates-sound_tsstate;
+        if (dt < 0)
+            dt += tsmax;
+        int n = (Float32)dt/(tsmax*tsmaxfreq/22050);
+        soundGenerator.periodLength = n;
+        sound_tsstate = tstates;
+    }
     return 0;
 }
 
 void fix_tstates()
 {
+    static int first_time = 1;
+    if (first_time) {
+        first_time = 0;
+        load_state();
+        keyboard_clear();
+    }
     static CFAbsoluteTime t0 = 0.0;
     CFAbsoluteTime t1 = CFAbsoluteTimeGetCurrent();
     tstates -= tsmax;

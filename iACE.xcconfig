@@ -1,0 +1,10 @@
+//  iACE.xcconfig
+//  Created by Edward Patel on 2013-01-05.
+
+ACTIVATE_EDIT_MODE = 0
+ACTIVATE_EDIT_MODE[sdk=iphonesimulator*] = 1
+
+IACE_VERSION = 1.1
+
+GCC_PREPROCESSOR_DEFINITIONS = ACTIVATE_EDIT_MODE=$ACTIVATE_EDIT_MODE $(inherited)
+

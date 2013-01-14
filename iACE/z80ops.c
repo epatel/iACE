@@ -686,6 +686,7 @@ endinstr;
 
 instr(0x76,4);
    /* no interrupt support, so effectively a nop */
+    tstates = tsmax+1;
 endinstr;
 
 HLinstr(0x77,7,8);

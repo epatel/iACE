@@ -18,7 +18,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
 #include <stdio.h>
+#include <string.h>
 
 #include "z80.h"
 
@@ -43,8 +45,6 @@ unsigned char partable[256] = {
     4, 0, 0, 4, 0, 4, 4, 0, 0, 4, 4, 0, 4, 0, 0, 4
 };
 
-// Preparation for persistent function by moving Z80 CPU out here.
-
 static struct {
     unsigned char op;
     unsigned char a, f, b, c, d, e, h, l;
@@ -55,6 +55,19 @@ static struct {
     unsigned char ixoriy, new_ixoriy;
     unsigned char intsample;
 } g;
+
+static char savedG[sizeof(g)];
+
+void get_z80_internal_state(char **ptr, int *len)
+{
+    *ptr = (char*)&savedG;
+    *len = sizeof(g);
+}
+
+void set_z80_internal_state(const char *ptr)
+{
+    memcpy(&g, ptr, sizeof(g));
+}
 
 void mainloop()
 {
@@ -108,8 +121,10 @@ void mainloop()
 #include "z80ops.c"
         }
         
-        if (tstates>tsmax)
+        if (tstates > tsmax) {
+            memcpy(&savedG, &g, sizeof(g));
             fix_tstates();
+        }
         
         if (interrupted == 1 && intsample && iff1) {
             do_interrupt();

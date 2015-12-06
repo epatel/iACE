@@ -356,7 +356,7 @@ int spooler_read_char()
 {
     if (spooler_is_active())
         return;
-    int x = [sender tag];
+    NSInteger x = [sender tag];
     if ((x==256 || x==512) && self.toggleShiftKeySwitch.on)
         return;
     keyboard_ports[0xff & x] &= ~(x>>8);
@@ -364,7 +364,7 @@ int spooler_read_char()
 
 - (IBAction)keyUp:(id)sender
 {
-    int x = [sender tag];
+    NSInteger x = [sender tag];
     if (spooler_is_active()) {
         if (x==263) { // break! stop spooling if break-space pressed (on keyup for safety)
             free(spooling_string);
@@ -388,7 +388,7 @@ int spooler_read_char()
     if (spooler_is_active())
         return;
     
-    int x = sender.tag;
+    NSInteger x = sender.tag;
     if (!self.toggleShiftKeySwitch.on) {
         [self keyUp:sender];
         return;
@@ -482,8 +482,8 @@ int spooler_read_char()
                 CGRect rect;
                 rect.origin.x = MIN(p.x, p2.x);
                 rect.origin.y = MIN(p.y, p2.y);
-                rect.size.width = fabsf(p.x-p2.x);
-                rect.size.height = fabsf(p.y-p2.y);
+                rect.size.width = fabs(p.x-p2.x);
+                rect.size.height = fabs(p.y-p2.y);
                 self.createdAnnotation.rect = rect;
             }
             [pdfView setNeedsDisplay];
@@ -570,7 +570,7 @@ int spooler_read_char()
     }
 }
 
-- (void)saveLastpage:(int)lastpage
+- (void)saveLastpage:(NSInteger)lastpage
 {
     // Lets have a slight delay so we don't save to preferences like crazy
     static int counter = 0;
@@ -587,7 +587,7 @@ int spooler_read_char()
     });
 }
 
-- (void)gotoPage:(int)page
+- (void)gotoPage:(NSInteger)page
 {
     self.pageSlider.value = page;
     if (page == 2) {
@@ -646,7 +646,7 @@ int spooler_read_char()
 
 - (IBAction)pageSliderChanged:(id)sender
 {
-    int currentPage = self.pageSlider.value;
+    NSInteger currentPage = self.pageSlider.value;
 
     if (currentPage > self.currentBookView.numberOfPages)
         currentPage = self.currentBookView.numberOfPages+1;

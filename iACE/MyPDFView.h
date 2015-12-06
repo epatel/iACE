@@ -19,15 +19,15 @@
 @end
 
 @interface MyPDFView : UIView {
-    int pageNumber;
+    NSInteger pageNumber;
 }
 
 + (void)loadAnnotations;
 + (void)saveAnnotations;
 
-- (void)gotoPage:(int)nextPage;
-- (int)pageNumber;
-- (int)numberOfPages;
+- (void)gotoPage:(NSInteger)nextPage;
+- (NSInteger)pageNumber;
+- (NSInteger)numberOfPages;
 
 - (MyAnnotation*)annotationAtPoint:(CGPoint)point;
 - (void)addAnnotation:(MyAnnotation*)annotation;

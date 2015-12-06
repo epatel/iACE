@@ -155,7 +155,7 @@ void load_p(int _de, int _hl)
     static int efp;
     static int firstTime=1;
     static NSData *_data=nil;
-    static NSData *_filename=nil;
+    static NSString *_filename=nil;
     static const unsigned char *ptr;
 
     if (firstTime) {
@@ -276,7 +276,7 @@ void setup_iace()
 }
 
 static BOOL soundStarted = NO;
-static int sound_tsstate = 0;
+static long sound_tsstate = 0;
 static SoundGenerator *soundGenerator;
 
 int spooler_read_char();
@@ -343,7 +343,7 @@ unsigned int out(int h, int l, int a)
             [soundGenerator activateAudioSession];
         }
         soundStarted = YES;
-        int dt = tstates-sound_tsstate;
+        long dt = (long)tstates-sound_tsstate;
         if (dt < 0)
             dt += tsmax;
         int n = (Float32)dt/(tsmax*tsmaxfreq/22050);

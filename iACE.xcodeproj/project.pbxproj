@@ -235,7 +235,7 @@
 		3AD4ADE7167FD7F0007CFAA3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Edward Patel";
 			};
 			buildConfigurationList = 3AD4ADEA167FD7F0007CFAA3 /* Build configuration list for PBXProject "iACE" */;
@@ -352,6 +352,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -401,7 +402,9 @@
 				GCC_PREFIX_HEADER = "iACE/iACE-Prefix.pch";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				INFOPLIST_FILE = "iACE/iACE-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.memention.iACE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WARNING_CFLAGS = "-Wno-multichar";
 				WRAPPER_EXTENSION = app;
 			};
@@ -414,7 +417,9 @@
 				GCC_PREFIX_HEADER = "iACE/iACE-Prefix.pch";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				INFOPLIST_FILE = "iACE/iACE-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.memention.iACE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WARNING_CFLAGS = "-Wno-multichar";
 				WRAPPER_EXTENSION = app;
 			};

@@ -55,7 +55,7 @@
 @end
 
 static CGPDFDocumentRef book = NULL;
-static int numBookPages = 0;
+static NSUInteger numBookPages = 0;
 static NSMutableDictionary *annotations;
 
 @implementation MyPDFView
@@ -64,10 +64,15 @@ static NSMutableDictionary *annotations;
 {
     NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"annotations" withExtension:@"dic"]]];
 
-    annotations = [unarchiver decodeObjectForKey:@"annotations"];
-
+    if (annotations)
+        [annotations release];
+    
+    annotations = [[unarchiver decodeObjectForKey:@"annotations"] mutableCopy];
+    
     if (!annotations)
         annotations = [[NSMutableDictionary alloc] init];
+    
+    [unarchiver release];
 }
 
 + (void)saveAnnotations
@@ -81,6 +86,9 @@ static NSMutableDictionary *annotations;
         [archiver finishEncoding];
 
         [data writeToFile:@"/tmp/annotations.dic" atomically:YES];
+        
+        [data release];
+        [archiver release];
     }
 #endif
 }
@@ -99,17 +107,17 @@ static NSMutableDictionary *annotations;
     return self;
 }
 
-- (int)numberOfPages
+- (NSInteger)numberOfPages
 {
     return numBookPages;
 }
 
-- (int)pageNumber
+- (NSInteger)pageNumber
 {
     return pageNumber;
 }
 
-- (void)gotoPage:(int)nextPage
+- (void)gotoPage:(NSInteger)nextPage
 {
 	pageNumber = nextPage;
 	[self setNeedsDisplay];

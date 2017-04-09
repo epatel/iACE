@@ -1,3 +1,11 @@
+Fun news!
+=========
+
+The Jupiter ACE brand has been revived here https://jupiter-ace.com, stay tuned.
+
+Jupiter ACE is now trademark of Andrews UK Ltd.
+
+
 iACE
 ====
 

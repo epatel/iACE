@@ -288,6 +288,14 @@ int spooler_read_char()
 {
     [super viewDidLoad];
 
+    CGSize viewSize = self.view.bounds.size;
+    CGSize windowSize = UIApplication.sharedApplication.windows.firstObject.bounds.size;
+
+    CGFloat scaleX = windowSize.width / viewSize.width;
+    CGFloat scaleY = windowSize.height / viewSize.height;
+
+    self.view.transform = CGAffineTransformMakeScale(scaleX, scaleY);
+
     _resetButton.layer.borderColor = UIColor.whiteColor.CGColor;
     _resetButton.layer.borderWidth = 1;
     _resetButton.layer.cornerRadius = 10;

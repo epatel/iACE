@@ -287,7 +287,17 @@ int spooler_read_char()
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    _resetButton.layer.borderColor = UIColor.whiteColor.CGColor;
+    _resetButton.layer.borderWidth = 1;
+    _resetButton.layer.cornerRadius = 10;
+    _openInfoButton.layer.borderColor = UIColor.whiteColor.CGColor;
+    _openInfoButton.layer.borderWidth = 1;
+    _openInfoButton.layer.cornerRadius = 10;
+    _openJupterACEButton.layer.borderColor = UIColor.whiteColor.CGColor;
+    _openJupterACEButton.layer.borderWidth = 1;
+    _openJupterACEButton.layer.cornerRadius = 10;
+
 #if ACTIVATE_EDIT_MODE
     self.editSwitch.hidden = NO;
 #endif
@@ -729,6 +739,11 @@ int spooler_read_char()
 - (IBAction)openInfoPage:(id)sender
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://memention.com/iace"]];
+}
+
+- (IBAction)openJupiterACEPage:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://jupiter-ace.com"]];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

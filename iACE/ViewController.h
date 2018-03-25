@@ -28,6 +28,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *settingsLidImageView;
 @property (weak, nonatomic) IBOutlet UISwitch *toggleShiftKeySwitch;
 
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
+@property (weak, nonatomic) IBOutlet UIButton *openInfoButton;
+@property (weak, nonatomic) IBOutlet UIButton *openJupterACEButton;
+
 - (IBAction)keyDown:(id)sender;
 - (IBAction)shiftKeyDown:(id)sender;
 - (IBAction)keyUp:(id)sender;
@@ -40,5 +44,6 @@
 - (IBAction)resetPressed:(id)sender;
 - (IBAction)toggleShiftKeysSwitch:(id)sender;
 - (IBAction)openInfoPage:(id)sender;
+- (IBAction)openJupiterACEPage:(id)sender;
 
 @end
